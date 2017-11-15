@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <string.h>
+#include <stdlib.h>
 #include <libpmemobj.h>
 
 #include "rect.h"
@@ -14,7 +15,7 @@ int main(int argc, char* argv[]) {
 		printf("Usage: %s file_name width height \n", argv[0]);
 		return 1;
 	}
-
+	
 	PMEMobjpool *pop = pmemobj_create(argv[1],
 			POBJ_LAYOUT_NAME(rect_lay), PMEMOBJ_MIN_POOL, 0666);
 	if (pop == NULL){
@@ -28,8 +29,8 @@ int main(int argc, char* argv[]) {
 		TX_ADD(root);
 		//declare and assign
 		TOID(struct my_rectangle) rect = TX_NEW(struct my_rectangle);
-		D_RW(rect)->w = 3;
-		D_RW(rect)->h = 4;
+		D_RW(rect)->w = atoi(argv[2]);
+		D_RW(rect)->h = atoi(argv[3]);
 		D_RW(root)->rect = rect;
 	} TX_END
 

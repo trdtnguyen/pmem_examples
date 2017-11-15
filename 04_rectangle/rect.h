@@ -1,6 +1,7 @@
 #include <libpmemobj.h>
 
 #define MAX_BUF_LEN 10 /* maximum length of our buffer */
+#define PAGE_SIZE (4*1024)
 
 struct my_rectangle;
 struct my_root;
